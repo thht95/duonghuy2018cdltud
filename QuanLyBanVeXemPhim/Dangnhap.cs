@@ -33,7 +33,7 @@ namespace QuanLyBanVeXemPhim
                 nhanvien.Thoigiandangnhapcuoi = DateTime.Now;
                 Session.dbContxt.SaveChanges();
 
-                MessageBox.Show("Đăng Nhâp Thành Công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 manv = nhanvien.ID.ToString();
                 Form1 form1 = new Form1();
                 form1.Show();
