@@ -33,7 +33,7 @@ namespace QuanLyBanVeXemPhim
                 nhanvien.Thoigiandangnhapcuoi = DateTime.Now;
                 Session.dbContxt.SaveChanges();
 
-                MessageBox.Show("Tôi vừa thực hiện 1 thay đổi trên máy tôi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thay đổi được thực hiện vào lúc 9h22 phút. bạn test đi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 manv = nhanvien.ID.ToString();
                 Form1 form1 = new Form1();
                 form1.Show();
