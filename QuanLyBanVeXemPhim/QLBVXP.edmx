@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLBVXPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vitri" Type="varchar" MaxLength="50" />
+          <Property Name="PhongChieuID" Type="int" />
+          <Property Name="Loaighe" Type="int" />
+          <Property Name="Tinhtrang" Type="bit" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NhanvienID" Type="int" />
+          <Property Name="Soluongve" Type="int" />
+          <Property Name="Tongtien" Type="float" />
+        </EntityType>
+        <EntityType Name="LICHCHIEU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhimID" Type="int" />
+          <Property Name="PhongchieuID" Type="int" />
+          <Property Name="Thoigianchieu" Type="datetime" />
+          <Property Name="Giave" Type="int" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ngaysinh" Type="datetime" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Thoigiandangnhapcuoi" Type="datetime" />
+          <Property Name="Diachi" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="varchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="bit" />
+        </EntityType>
+        <EntityType Name="PHIM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tenphim" Type="nvarchar" MaxLength="100" />
+          <Property Name="Thongtin" Type="nvarchar" MaxLength="500" />
+          <Property Name="Theloai" Type="nvarchar" MaxLength="50" />
+          <Property Name="Noidung" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="PHONGCHIEU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tenphong" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Size" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="VE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LichchieuID" Type="int" />
+          <Property Name="GheID" Type="int" />
+          <Property Name="HoadonID" Type="int" />
+        </EntityType>
+        <Association Name="FK_GHE_PHONGCHIEU">
+          <End Role="PHONGCHIEU" Type="Self.PHONGCHIEU" Multiplicity="0..1" />
+          <End Role="GHE" Type="Self.GHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGCHIEU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GHE">
+              <PropertyRef Name="PhongChieuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOADON_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="NhanvienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHCHIEU_PHIM">
+          <End Role="PHIM" Type="Self.PHIM" Multiplicity="0..1" />
+          <End Role="LICHCHIEU" Type="Self.LICHCHIEU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICHCHIEU">
+              <PropertyRef Name="PhimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHCHIEU_PHONGCHIEU">
+          <End Role="PHONGCHIEU" Type="Self.PHONGCHIEU" Multiplicity="0..1" />
+          <End Role="LICHCHIEU" Type="Self.LICHCHIEU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGCHIEU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICHCHIEU">
+              <PropertyRef Name="PhongchieuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VE_GHE">
+          <End Role="GHE" Type="Self.GHE" Multiplicity="0..1" />
+          <End Role="VE" Type="Self.VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GHE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VE">
+              <PropertyRef Name="GheID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VE_HOADON">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="0..1" />
+          <End Role="VE" Type="Self.VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VE">
+              <PropertyRef Name="HoadonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VE_LICHCHIEU">
+          <End Role="LICHCHIEU" Type="Self.LICHCHIEU" Multiplicity="0..1" />
+          <End Role="VE" Type="Self.VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICHCHIEU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VE">
+              <PropertyRef Name="LichchieuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBVXPModelStoreContainer">
+          <EntitySet Name="GHE" EntityType="Self.GHE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHCHIEU" EntityType="Self.LICHCHIEU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHIM" EntityType="Self.PHIM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHONGCHIEU" EntityType="Self.PHONGCHIEU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VE" EntityType="Self.VE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GHE_PHONGCHIEU" Association="Self.FK_GHE_PHONGCHIEU">
+            <End Role="PHONGCHIEU" EntitySet="PHONGCHIEU" />
+            <End Role="GHE" EntitySet="GHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_NHANVIEN" Association="Self.FK_HOADON_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHCHIEU_PHIM" Association="Self.FK_LICHCHIEU_PHIM">
+            <End Role="PHIM" EntitySet="PHIM" />
+            <End Role="LICHCHIEU" EntitySet="LICHCHIEU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHCHIEU_PHONGCHIEU" Association="Self.FK_LICHCHIEU_PHONGCHIEU">
+            <End Role="PHONGCHIEU" EntitySet="PHONGCHIEU" />
+            <End Role="LICHCHIEU" EntitySet="LICHCHIEU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VE_GHE" Association="Self.FK_VE_GHE">
+            <End Role="GHE" EntitySet="GHE" />
+            <End Role="VE" EntitySet="VE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VE_HOADON" Association="Self.FK_VE_HOADON">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="VE" EntitySet="VE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VE_LICHCHIEU" Association="Self.FK_VE_LICHCHIEU">
+            <End Role="LICHCHIEU" EntitySet="LICHCHIEU" />
+            <End Role="VE" EntitySet="VE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLBVXPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QLBVXPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GHEs" EntityType="QLBVXPModel.GHE" />
+          <EntitySet Name="HOADONs" EntityType="QLBVXPModel.HOADON" />
+          <EntitySet Name="LICHCHIEUx" EntityType="QLBVXPModel.LICHCHIEU" />
+          <EntitySet Name="NHANVIENs" EntityType="QLBVXPModel.NHANVIEN" />
+          <EntitySet Name="PHIMs" EntityType="QLBVXPModel.PHIM" />
+          <EntitySet Name="PHONGCHIEUx" EntityType="QLBVXPModel.PHONGCHIEU" />
+          <EntitySet Name="sysdiagrams" EntityType="QLBVXPModel.sysdiagram" />
+          <EntitySet Name="VEs" EntityType="QLBVXPModel.VE" />
+          <AssociationSet Name="FK_GHE_PHONGCHIEU" Association="QLBVXPModel.FK_GHE_PHONGCHIEU">
+            <End Role="PHONGCHIEU" EntitySet="PHONGCHIEUx" />
+            <End Role="GHE" EntitySet="GHEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VE_GHE" Association="QLBVXPModel.FK_VE_GHE">
+            <End Role="GHE" EntitySet="GHEs" />
+            <End Role="VE" EntitySet="VEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_NHANVIEN" Association="QLBVXPModel.FK_HOADON_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VE_HOADON" Association="QLBVXPModel.FK_VE_HOADON">
+            <End Role="HOADON" EntitySet="HOADONs" />
+            <End Role="VE" EntitySet="VEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHCHIEU_PHIM" Association="QLBVXPModel.FK_LICHCHIEU_PHIM">
+            <End Role="PHIM" EntitySet="PHIMs" />
+            <End Role="LICHCHIEU" EntitySet="LICHCHIEUx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHCHIEU_PHONGCHIEU" Association="QLBVXPModel.FK_LICHCHIEU_PHONGCHIEU">
+            <End Role="PHONGCHIEU" EntitySet="PHONGCHIEUx" />
+            <End Role="LICHCHIEU" EntitySet="LICHCHIEUx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VE_LICHCHIEU" Association="QLBVXPModel.FK_VE_LICHCHIEU">
+            <End Role="LICHCHIEU" EntitySet="LICHCHIEUx" />
+            <End Role="VE" EntitySet="VEs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vitri" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhongChieuID" Type="Int32" />
+          <Property Name="Loaighe" Type="Int32" />
+          <Property Name="Tinhtrang" Type="Boolean" />
+          <NavigationProperty Name="PHONGCHIEU" Relationship="QLBVXPModel.FK_GHE_PHONGCHIEU" FromRole="GHE" ToRole="PHONGCHIEU" />
+          <NavigationProperty Name="VEs" Relationship="QLBVXPModel.FK_VE_GHE" FromRole="GHE" ToRole="VE" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NhanvienID" Type="Int32" />
+          <Property Name="Soluongve" Type="Int32" />
+          <Property Name="Tongtien" Type="Double" />
+          <NavigationProperty Name="NHANVIEN" Relationship="QLBVXPModel.FK_HOADON_NHANVIEN" FromRole="HOADON" ToRole="NHANVIEN" />
+          <NavigationProperty Name="VEs" Relationship="QLBVXPModel.FK_VE_HOADON" FromRole="HOADON" ToRole="VE" />
+        </EntityType>
+        <EntityType Name="LICHCHIEU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhimID" Type="Int32" />
+          <Property Name="PhongchieuID" Type="Int32" />
+          <Property Name="Thoigianchieu" Type="DateTime" Precision="3" />
+          <Property Name="Giave" Type="Int32" />
+          <NavigationProperty Name="PHIM" Relationship="QLBVXPModel.FK_LICHCHIEU_PHIM" FromRole="LICHCHIEU" ToRole="PHIM" />
+          <NavigationProperty Name="PHONGCHIEU" Relationship="QLBVXPModel.FK_LICHCHIEU_PHONGCHIEU" FromRole="LICHCHIEU" ToRole="PHONGCHIEU" />
+          <NavigationProperty Name="VEs" Relationship="QLBVXPModel.FK_VE_LICHCHIEU" FromRole="LICHCHIEU" ToRole="VE" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ngaysinh" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Thoigiandangnhapcuoi" Type="DateTime" Precision="3" />
+          <Property Name="Diachi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAdmin" Type="Boolean" />
+          <NavigationProperty Name="HOADONs" Relationship="QLBVXPModel.FK_HOADON_NHANVIEN" FromRole="NHANVIEN" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="PHIM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tenphim" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Thongtin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Theloai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Noidung" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LICHCHIEUx" Relationship="QLBVXPModel.FK_LICHCHIEU_PHIM" FromRole="PHIM" ToRole="LICHCHIEU" />
+        </EntityType>
+        <EntityType Name="PHONGCHIEU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tenphong" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GHEs" Relationship="QLBVXPModel.FK_GHE_PHONGCHIEU" FromRole="PHONGCHIEU" ToRole="GHE" />
+          <NavigationProperty Name="LICHCHIEUx" Relationship="QLBVXPModel.FK_LICHCHIEU_PHONGCHIEU" FromRole="PHONGCHIEU" ToRole="LICHCHIEU" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LichchieuID" Type="Int32" />
+          <Property Name="GheID" Type="Int32" />
+          <Property Name="HoadonID" Type="Int32" />
+          <NavigationProperty Name="GHE" Relationship="QLBVXPModel.FK_VE_GHE" FromRole="VE" ToRole="GHE" />
+          <NavigationProperty Name="HOADON" Relationship="QLBVXPModel.FK_VE_HOADON" FromRole="VE" ToRole="HOADON" />
+          <NavigationProperty Name="LICHCHIEU" Relationship="QLBVXPModel.FK_VE_LICHCHIEU" FromRole="VE" ToRole="LICHCHIEU" />
+        </EntityType>
+        <Association Name="FK_GHE_PHONGCHIEU">
+          <End Type="QLBVXPModel.PHONGCHIEU" Role="PHONGCHIEU" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.GHE" Role="GHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGCHIEU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GHE">
+              <PropertyRef Name="PhongChieuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VE_GHE">
+          <End Type="QLBVXPModel.GHE" Role="GHE" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.VE" Role="VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GHE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VE">
+              <PropertyRef Name="GheID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOADON_NHANVIEN">
+          <End Type="QLBVXPModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.HOADON" Role="HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="NhanvienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VE_HOADON">
+          <End Type="QLBVXPModel.HOADON" Role="HOADON" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.VE" Role="VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VE">
+              <PropertyRef Name="HoadonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHCHIEU_PHIM">
+          <End Type="QLBVXPModel.PHIM" Role="PHIM" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.LICHCHIEU" Role="LICHCHIEU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICHCHIEU">
+              <PropertyRef Name="PhimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHCHIEU_PHONGCHIEU">
+          <End Type="QLBVXPModel.PHONGCHIEU" Role="PHONGCHIEU" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.LICHCHIEU" Role="LICHCHIEU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGCHIEU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICHCHIEU">
+              <PropertyRef Name="PhongchieuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VE_LICHCHIEU">
+          <End Type="QLBVXPModel.LICHCHIEU" Role="LICHCHIEU" Multiplicity="0..1" />
+          <End Type="QLBVXPModel.VE" Role="VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICHCHIEU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VE">
+              <PropertyRef Name="LichchieuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLBVXPModelStoreContainer" CdmEntityContainer="QLBVXPEntities">
+          <EntitySetMapping Name="GHEs">
+            <EntityTypeMapping TypeName="QLBVXPModel.GHE">
+              <MappingFragment StoreEntitySet="GHE">
+                <ScalarProperty Name="Tinhtrang" ColumnName="Tinhtrang" />
+                <ScalarProperty Name="Loaighe" ColumnName="Loaighe" />
+                <ScalarProperty Name="PhongChieuID" ColumnName="PhongChieuID" />
+                <ScalarProperty Name="Vitri" ColumnName="Vitri" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADONs">
+            <EntityTypeMapping TypeName="QLBVXPModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="Tongtien" ColumnName="Tongtien" />
+                <ScalarProperty Name="Soluongve" ColumnName="Soluongve" />
+                <ScalarProperty Name="NhanvienID" ColumnName="NhanvienID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHCHIEUx">
+            <EntityTypeMapping TypeName="QLBVXPModel.LICHCHIEU">
+              <MappingFragment StoreEntitySet="LICHCHIEU">
+                <ScalarProperty Name="Giave" ColumnName="Giave" />
+                <ScalarProperty Name="Thoigianchieu" ColumnName="Thoigianchieu" />
+                <ScalarProperty Name="PhongchieuID" ColumnName="PhongchieuID" />
+                <ScalarProperty Name="PhimID" ColumnName="PhimID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIENs">
+            <EntityTypeMapping TypeName="QLBVXPModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="Thoigiandangnhapcuoi" ColumnName="Thoigiandangnhapcuoi" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHIMs">
+            <EntityTypeMapping TypeName="QLBVXPModel.PHIM">
+              <MappingFragment StoreEntitySet="PHIM">
+                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
+                <ScalarProperty Name="Theloai" ColumnName="Theloai" />
+                <ScalarProperty Name="Thongtin" ColumnName="Thongtin" />
+                <ScalarProperty Name="Tenphim" ColumnName="Tenphim" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHONGCHIEUx">
+            <EntityTypeMapping TypeName="QLBVXPModel.PHONGCHIEU">
+              <MappingFragment StoreEntitySet="PHONGCHIEU">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Tenphong" ColumnName="Tenphong" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QLBVXPModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VEs">
+            <EntityTypeMapping TypeName="QLBVXPModel.VE">
+              <MappingFragment StoreEntitySet="VE">
+                <ScalarProperty Name="HoadonID" ColumnName="HoadonID" />
+                <ScalarProperty Name="GheID" ColumnName="GheID" />
+                <ScalarProperty Name="LichchieuID" ColumnName="LichchieuID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

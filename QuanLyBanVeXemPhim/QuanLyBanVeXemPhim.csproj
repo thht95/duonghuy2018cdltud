@@ -31,8 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,14 +55,117 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Banve.Designer.cs">
+      <DependentUpon>Banve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dangnhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dangnhap.Designer.cs">
+      <DependentUpon>Dangnhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GHE.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HOADON.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LICHCHIEU.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NHANVIEN.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHIM.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHONGCHIEU.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLBVXP.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBVXP.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLBVXP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLBVXP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBVXP.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="QuanlyGhe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanlyGhe.Designer.cs">
+      <DependentUpon>QuanlyGhe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanlyLichchieu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanlyLichchieu.Designer.cs">
+      <DependentUpon>QuanlyLichchieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyNhanVien.Designer.cs">
+      <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyPhim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyPhim.Designer.cs">
+      <DependentUpon>QuanLyPhim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanlyPhongchieu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanlyPhongchieu.Designer.cs">
+      <DependentUpon>QuanlyPhongchieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongTin.Designer.cs">
+      <DependentUpon>ThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucThongtin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucThongtin.Designer.cs">
+      <DependentUpon>ucThongtin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VE.cs">
+      <DependentUpon>QLBVXP.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Banve.resx">
+      <DependentUpon>Banve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dangnhap.resx">
+      <DependentUpon>Dangnhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -61,6 +175,28 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuanlyGhe.resx">
+      <DependentUpon>QuanlyGhe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanlyLichchieu.resx">
+      <DependentUpon>QuanlyLichchieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyNhanVien.resx">
+      <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyPhim.resx">
+      <DependentUpon>QuanLyPhim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanlyPhongchieu.resx">
+      <DependentUpon>QuanlyPhongchieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThongTin.resx">
+      <DependentUpon>ThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucThongtin.resx">
+      <DependentUpon>ucThongtin.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -70,9 +206,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="QLBVXP.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLBVXP.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="QLBVXP.edmx.diagram">
+      <DependentUpon>QLBVXP.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="QLBVXP.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLBVXP.edmx</DependentUpon>
+      <LastGenOutput>QLBVXP.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="QLBVXP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLBVXP.edmx</DependentUpon>
+      <LastGenOutput>QLBVXP.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
