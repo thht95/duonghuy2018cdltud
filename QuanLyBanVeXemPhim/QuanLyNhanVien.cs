@@ -36,7 +36,7 @@ namespace QuanLyBanVeXemPhim
                 var list = Session.dbContxt.NHANVIENs.Select(x => x.SDT).ToList();
                 if (list.Contains(txtSdt.Text))
                 {
-                    MessageBox.Show("Đã có số điện thoại này");
+                    MessageBox.Show("Đã có số điện thoại này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -122,7 +122,7 @@ namespace QuanLyBanVeXemPhim
                         var list = Session.dbContxt.NHANVIENs.Select(x => x.SDT).ToList();
                         if (list.Contains(txtSdt.Text))
                         {
-                            MessageBox.Show("Đã có số điện thoại này");
+                            MessageBox.Show("Đã có số điện thoại này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
