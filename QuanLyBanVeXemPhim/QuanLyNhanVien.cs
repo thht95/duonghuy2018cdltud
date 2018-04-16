@@ -117,15 +117,26 @@ namespace QuanLyBanVeXemPhim
                     int manhanvien = Convert.ToInt32(lblID.Text);
                     NHANVIEN nv = Session.dbContxt.NHANVIENs.Where(x => x.ID == manhanvien).FirstOrDefault();
 
-                    nv.Hoten = txtHOten.Text;
-                    nv.UserName = txtUsername.Text;
-                    nv.Ngaysinh = dtpNgaysinh.Value;
-                    nv.SDT = txtSdt.Text;
-                    nv.IsAdmin = ckbIsAdmin.Checked;
+                    if (nv.SDT != txtSdt.Text)
+                    {
+                        var list = Session.dbContxt.NHANVIENs.Select(x => x.SDT).ToList();
+                        if (list.Contains(txtSdt.Text))
+                        {
+                            MessageBox.Show("Đã có số điện thoại này");
+                        }
+                        else
+                        {
+                            nv.Hoten = txtHOten.Text;
+                            nv.UserName = txtUsername.Text;
+                            nv.Ngaysinh = dtpNgaysinh.Value;
+                            nv.SDT = txtSdt.Text;
+                            nv.IsAdmin = ckbIsAdmin.Checked;
 
-                    Session.dbContxt.SaveChanges();
-                    reloadData();
-                    MessageBox.Show("Sửa thành công");
+                            Session.dbContxt.SaveChanges();
+                            reloadData();
+                            MessageBox.Show("Sửa thành công");
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -147,10 +158,21 @@ namespace QuanLyBanVeXemPhim
                 txtHOten.Text = dgv[1, rowIndex].Value.ToString();
                 txtUsername.Text = dgv[2, rowIndex].Value.ToString();
                 dtpNgaysinh.Value = Convert.ToDateTime(dgv[3, rowIndex].Value);
-                txtSdt.Text = Convert.ToString(dgv[4, rowIndex].Value);
-                txtDiachi.Text = dgv[5, rowIndex].Value.ToString();
-                ckbIsAdmin.Checked = Convert.ToBoolean(dgv[6, rowIndex].Value);
-                lblLastLogin.Text = Convert.ToString(dgv[7, rowIndex].Value);
+                txtSdt.Text = Convert.ToString(dgv[5, rowIndex].Value);
+                txtDiachi.Text = dgv[6, rowIndex].Value.ToString();
+                ckbIsAdmin.Checked = Convert.ToBoolean(dgv[7, rowIndex].Value);
+                lblLastLogin.Text = Convert.ToString(dgv[8, rowIndex].Value);
+            }
+        }
+
+        private void dgv_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            int colIndex = e.ColumnIndex;
+            if (rowIndex >= 0 && colIndex == 4)
+            {
+                DateTime dt = Convert.ToDateTime(dgv[3, rowIndex].Value);
+                e.Value = DateTime.Now.Year - dt.Year;
             }
         }
     }
