@@ -33,23 +33,31 @@ namespace QuanLyBanVeXemPhim
         {
             try
             {
-                NHANVIEN nhanvien = new NHANVIEN();
+                var list = Session.dbContxt.NHANVIENs.Select(x => x.SDT).ToList();
+                if (list.Contains(txtSdt.Text))
+                {
+                    MessageBox.Show("Đã có số điện thoại này");
+                }
+                else
+                {
+                    NHANVIEN nhanvien = new NHANVIEN();
 
-                nhanvien.UserName = txtUsername.Text;
-                nhanvien.Hoten = txtHOten.Text;
-                nhanvien.IsAdmin = ckbIsAdmin.Checked;
-                nhanvien.Ngaysinh = dtpNgaysinh.Value;
-                nhanvien.Diachi = txtDiachi.Text;
-                nhanvien.SDT = txtSdt.Text;
-                nhanvien.Password = "1";
-                nhanvien.Thoigiandangnhapcuoi = DateTime.Now;
+                    nhanvien.UserName = txtUsername.Text;
+                    nhanvien.Hoten = txtHOten.Text;
+                    nhanvien.IsAdmin = ckbIsAdmin.Checked;
+                    nhanvien.Ngaysinh = dtpNgaysinh.Value;
+                    nhanvien.Diachi = txtDiachi.Text;
+                    nhanvien.SDT = txtSdt.Text;
+                    nhanvien.Password = "1";
+                    nhanvien.Thoigiandangnhapcuoi = DateTime.Now;
 
-                Session.dbContxt.NHANVIENs.Add(nhanvien);
-                Session.dbContxt.SaveChanges();
+                    Session.dbContxt.NHANVIENs.Add(nhanvien);
+                    Session.dbContxt.SaveChanges();
 
-                MessageBox.Show("Thêm thành công");
+                    MessageBox.Show("Thêm thành công");
 
-                reloadData();
+                    reloadData();
+                }
             }
             catch (Exception ex)
             {
