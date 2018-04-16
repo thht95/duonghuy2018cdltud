@@ -40,7 +40,7 @@ namespace QuanLyBanVeXemPhim
             //DataTable dt = new DataTable();
             //da.Fill(dt);
             //conn.Close();
-
+            
             var list = Session.dbContxt.GHEs.Where(x => x.PhongChieuID == maphong).ToList();
 
             lbGhe.DisplayMember = "vitri";
